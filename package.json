@@ -19,6 +19,7 @@
     "expres": "0.0.5",
     "helmet": "^3.22.0",
     "morgan": "^1.10.0",
+    "uuid": "^7.0.3",
     "winston": "^3.2.1"
   },
   "devDependencies": {
