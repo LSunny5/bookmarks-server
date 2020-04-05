@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const { NODE_ENV } = require('./config')
 const validateToken = require('./validateToken')
-const errorHandler = require('./error-handler')
+const errorHandler = require('./errorHandler')
 const bookmarksRouter = require('./bookmarks/bookmarks-router')
 
 const app = express();
