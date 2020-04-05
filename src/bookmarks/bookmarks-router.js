@@ -1,5 +1,5 @@
 const express = require('express')
-const uuid = require('uuid/v4')
+const { v4: uuidv4 } = require('uuid')
 const logger = require('../logger')
 const store = require('../store')
 
@@ -32,7 +32,7 @@ bookmarksRouter
             return res.status(400).send(`'Rating' must be between 0 and 5`)
         }
 
-        const bookmark = { id: uuid(), title, url, description, rating }
+        const bookmark = { id: uuidv4(), title, url, description, rating }
         store.bookmarks.push(bookmark)
         logger.info(`Bookmark with id ${bookmark.id} created`)
         res
