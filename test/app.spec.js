@@ -63,7 +63,7 @@ describe('Bookmark endpoints', () => {
         .expect(200, findBookmark)
     })
     //bookmark was not found
-    it(`returns 404 whe bookmark doesn't exist`, () => {
+    it(`returns 404 when bookmark doesn't exist`, () => {
       return supertest(app)
         .get(`/bookmarks/doesnt-exist`)
         .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
@@ -84,11 +84,11 @@ describe('Bookmark endpoints', () => {
           })
       })
       //check for error when bookmark doesn't exist
-      it(`returns 404 whe bookmark doesn't exist`, () => {
+      it(`returns 404 when bookmark doesn't exist`, () => {
         return supertest(app)
           .delete(`/bookmarks/doesnt-exist`)
           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-          .expect(404, 'Bookmark Not Found')
+          .expect(404, 'Bookmark was not found, try again...')
       })
     })
 
@@ -104,7 +104,7 @@ describe('Bookmark endpoints', () => {
           .post(`/bookmarks`)
           .send(bookmarkNoTitle)
           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-          .expect(400, `'title' is missing`)
+          .expect(400, `'title' is required`)
       })
       //check for missing url
       it(`returns with 400 if url is missing`, () => {
@@ -116,7 +116,7 @@ describe('Bookmark endpoints', () => {
           .post(`/bookmarks`)
           .send(bookmarkNoURL)
           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-          .expect(400, `'url' is missing`)
+          .expect(400, `'url' is required`)
       })
       //check to see if URL is valid
       it(`returns 400 if URL given is not a valid URL`, () => {
@@ -154,10 +154,10 @@ describe('Bookmark endpoints', () => {
           .post(`/bookmarks`)
           .send(incorrectRating)
           .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-          .expect(400, `'rating' must be a number between 0 and 5`)
+          .expect(400, `rating must be between 0 and 5`)
       })
       //check that new bookmark is added
-      it('new bookmark was addded', () => {
+      it('new bookmark was added', () => {
         const newBookmark = {
           title: 'New Bookmark',
           url: 'https://newbookmark.com',

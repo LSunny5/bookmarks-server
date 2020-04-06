@@ -14,12 +14,7 @@ bookmarksRouter
         res.json(store.bookmarks)
     })
     .post(bodyParser, (req, res) => {
-        //pulled from solution, check if web is a valid URL
-        if (!isWebUri(url)) {
-            logger.error(`Invalid url '${url}' supplied`)
-            return res.status(400).send(`'url' must be a valid URL`)
-        }
-        for (const field of ['title', 'url', 'rating']) {
+        for (const field of ['url', 'title', 'rating']) {
             if (!req.body[field]) {
                 logger.error(`${field} is required`)
                 return res.status(400).send(`'${field}' is required`)
@@ -27,13 +22,22 @@ bookmarksRouter
         }
 
         const { title, url, description, rating } = req.body
+
         if (!Number.isInteger(rating) || rating < 0 || rating > 5) {
             logger.error(`Invalid rating '${rating}' try again`)
-            return res.status(400).send(`'Rating' must be between 0 and 5`)
+            return res.status(400).send(`rating must be between 0 and 5`)
+        }
+
+        //pulled from solution, check if web is a valid URL
+        if (!isWebUri(url)) {
+            logger.error(`Invalid url '${url}' supplied`)
+            return res.status(400).send(`'url' must be a valid URL`)
         }
 
         const bookmark = { id: uuidv4(), title, url, description, rating }
+
         store.bookmarks.push(bookmark)
+
         logger.info(`Bookmark with id ${bookmark.id} created`)
         res
             .status(201)
