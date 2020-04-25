@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 console.log(' node environemnt ' + process.env.NODE_ENV);
-console.log(' database url ' + DATABASE_URL);
+console.log(' database url ' + process.env.DATABASE_URL);
 
 module.exports = {
     "migrationDirectory": "migrations",
