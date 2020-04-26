@@ -21,18 +21,6 @@ app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
 
-app.get('/fun', (req, res) => {
-    res.send(`
-    [{
-        "id": 3, 
-        "title": "MDN", 
-        "url": "https://developer.mozilla.org", 
-        "description": "The only place blah blah blah...", 
-        "rating": 5
-    }]`
-    );
-})
-
 app.use(errorHandler)
 
 module.exports = app
